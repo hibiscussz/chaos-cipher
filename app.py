@@ -12,7 +12,7 @@ from PIL import Image
 
 st.set_page_config(
     page_title="Chaos TSL Cipher",
-    page_icon="◈",
+    page_icon="🔐",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -37,9 +37,9 @@ st.markdown("""
     --lavender: #5a3ea0;
     --border:   rgba(42,111,168,0.22);
     --border2:  rgba(42,111,168,0.10);
-    --text:     #1a2e42;
-    --muted:    #3a6080;
-    --dimmer:   #7090aa;
+    --text:     #0d1f2d;
+    --muted:    #1e3a52;
+    --dimmer:   #2d5070;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -79,7 +79,7 @@ input[type="number"], input[type="text"], input {
     background: var(--bg3) !important;
     border: 1px solid var(--border) !important;
     border-radius: 8px !important;
-    color: var(--sky2) !important;
+    color: #0d1f2d !important;
     font-family: 'DM Mono', monospace !important;
     font-size: 0.95rem !important;
 }
@@ -155,7 +155,7 @@ label, [data-testid="stWidgetLabel"], p {
 .stButton > button {
     background: rgba(42,111,168,0.10) !important;
     border: 1.5px solid rgba(42,111,168,0.45) !important;
-    color: var(--sky2) !important;
+    color: #0d1f2d !important;
     font-family: 'Sora', sans-serif !important;
     font-size: 0.88rem !important;
     font-weight: 600 !important;
@@ -169,7 +169,7 @@ label, [data-testid="stWidgetLabel"], p {
     background: rgba(42,111,168,0.18) !important;
     border-color: var(--sky) !important;
     box-shadow: 0 4px 20px rgba(42,111,168,0.18) !important;
-    color: var(--sky2) !important;
+    color: #0d1f2d !important;
 }
 
 /* ── DOWNLOAD BUTTON ── */
@@ -325,7 +325,7 @@ st.markdown("""
             border:1px solid rgba(42,111,168,0.30);
             display:flex;align-items:center;justify-content:center;
             font-size:1.5rem; color:#1d5a8e;
-        ">◈</div>
+        ">🔐</div>
         <div>
             <div style="font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:700;
                         color:#1a2e42;letter-spacing:1px;line-height:1.1;">
@@ -347,15 +347,15 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:1rem 0 0.4rem;">
         <div style="font-family:'Sora',sans-serif;font-size:0.95rem;font-weight:600;
-                    color:#1d5a8e;letter-spacing:1px;">◈ Key Parameters</div>
+                    color:#1d5a8e;letter-spacing:1px;">🔑 Key Parameters</div>
         <div style="font-family:'DM Mono',monospace;font-size:0.62rem;
-                    color:#5a7a98;margin-top:3px;">cipher configuration</div>
+                    color:#1e3a52;margin-top:3px;">cipher configuration</div>
     </div>
     """, unsafe_allow_html=True)
     st.markdown("---")
 
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.62rem;
-                color:#5a7a98;letter-spacing:1.5px;margin-bottom:0.7rem;
+                color:#0a2540;letter-spacing:1.5px;margin-bottom:0.7rem;
                 text-transform:uppercase;">Chaos Map</div>""", unsafe_allow_html=True)
 
     x0 = st.number_input("x₀  —  Initial Condition",
@@ -370,7 +370,7 @@ with st.sidebar:
         step=0.01, format="%.4f", help="μ = 2.0 = chaos penuh")
 
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.62rem;
-                color:#5a7a98;letter-spacing:1.5px;margin:1rem 0 0.7rem;
+                color:#0a2540;letter-spacing:1.5px;margin:1rem 0 0.7rem;
                 text-transform:uppercase;">Diffusion</div>""", unsafe_allow_html=True)
 
     C0 = st.number_input("C₀  —  Diffusion Seed",
@@ -386,7 +386,7 @@ with st.sidebar:
                 border:1px solid rgba(42,111,168,0.20);
                 border-radius:10px;padding:1rem 1.1rem;
                 font-family:'DM Mono',monospace;">
-        <div style="font-size:0.6rem;color:#5a7a98;letter-spacing:1.5px;
+        <div style="font-size:0.6rem;color:#0a2540;letter-spacing:1.5px;
                     margin-bottom:0.7rem;text-transform:uppercase;">Active Key</div>
         <div style="font-size:0.73rem;line-height:2.1;color:#2a6fa8;">
             x₀ <span style="color:#1a2e42;">= {x0:.6f}</span><br>
@@ -422,16 +422,16 @@ col_up, col_btn = st.columns([3, 1])
 
 with col_up:
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                color:#5a7a98;letter-spacing:1.5px;margin-bottom:0.5rem;
+                color:#0a2540;letter-spacing:1.5px;margin-bottom:0.5rem;
                 text-transform:uppercase;">Input Image</div>""", unsafe_allow_html=True)
     uploaded = st.file_uploader("img", type=["jpg","jpeg","png"], label_visibility="collapsed")
 
 with col_btn:
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                color:#5a7a98;letter-spacing:1.5px;margin-bottom:0.5rem;
+                color:#0a2540;letter-spacing:1.5px;margin-bottom:0.5rem;
                 text-transform:uppercase;">Execute</div>""", unsafe_allow_html=True)
-    run_enc = st.button("◈  Encrypt", use_container_width=True)
-    run_dec = st.button("◇  Decrypt", use_container_width=True)
+    run_enc = st.button("🔒  Encrypt", use_container_width=True)
+    run_dec = st.button("🔓  Decrypt", use_container_width=True)
 
 # ─────────────────────────────────────────
 # PROCESS
@@ -445,10 +445,10 @@ if uploaded:
     <div style="display:flex;gap:2rem;background:rgba(42,111,168,0.06);
                 border:1px solid rgba(42,111,168,0.15);border-radius:8px;
                 padding:0.6rem 1.2rem;font-family:'DM Mono',monospace;
-                font-size:0.72rem;color:#5a7a98;margin-bottom:0.5rem;">
-        <span>shape <span style="color:#1d5a8e;">{M}×{N}×{ch}</span></span>
-        <span>pixels <span style="color:#1d5a8e;">{M*N:,}</span></span>
-        <span>bytes <span style="color:#1d5a8e;">{M*N*ch:,}</span></span>
+                font-size:0.72rem;color:#1e3a52;margin-bottom:0.5rem;">
+        <span>shape <span style="color:#0a3060;">{M}×{N}×{ch}</span></span>
+        <span>pixels <span style="color:#0a3060;">{M*N:,}</span></span>
+        <span>bytes <span style="color:#0a3060;">{M*N*ch:,}</span></span>
     </div>""", unsafe_allow_html=True)
 
     if run_enc:
@@ -470,7 +470,7 @@ if uploaded:
 
         # Images
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#5a7a98;letter-spacing:1.5px;margin:1.2rem 0 0.6rem;
+                    color:#0a2540;letter-spacing:1.5px;margin:1.2rem 0 0.6rem;
                     text-transform:uppercase;">Visual Output</div>""", unsafe_allow_html=True)
 
         c1, c2, c3 = st.columns(3)
@@ -500,7 +500,7 @@ if uploaded:
         npcr, uaci = hitung_npcr_uaci(cipher, cm)
 
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#5a7a98;letter-spacing:1.5px;margin:1.5rem 0 0.8rem;
+                    color:#0a2540;letter-spacing:1.5px;margin:1.5rem 0 0.8rem;
                     text-transform:uppercase;">Security Analysis</div>""", unsafe_allow_html=True)
 
         def mcard(col, label, val, sub, ok):
@@ -512,7 +512,7 @@ if uploaded:
                         border-top:2px solid {c};border-radius:10px;
                         padding:1rem 0.9rem 0.85rem;text-align:center;">
                 <div style="font-family:'DM Mono',monospace;font-size:0.6rem;
-                            color:#5a7a98;letter-spacing:1px;text-transform:uppercase;
+                            color:#1e3a52;letter-spacing:1px;text-transform:uppercase;
                             margin-bottom:0.3rem;">{label}</div>
                 <div style="font-family:'Sora',sans-serif;font-size:1.55rem;font-weight:700;
                             color:{c};margin:0.1rem 0;">{val}</div>
@@ -529,7 +529,7 @@ if uploaded:
 
         # Correlation
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#5a7a98;letter-spacing:1.5px;margin:1.5rem 0 0.7rem;
+                    color:#0a2540;letter-spacing:1.5px;margin:1.5rem 0 0.7rem;
                     text-transform:uppercase;">Pixel Correlation</div>""", unsafe_allow_html=True)
 
         ct1, ct2 = st.columns(2)
@@ -539,7 +539,7 @@ if uploaded:
                 ok = abs(v) < 0.05
                 ic = "#1a7a5e" if ok else "#c0284a"
                 rows += f"""<tr>
-                    <td style="padding:0.4rem 0.9rem;color:#5a7a98;font-size:0.7rem;">{nm}</td>
+                    <td style="padding:0.4rem 0.9rem;color:#1e3a52;font-size:0.7rem;">{nm}</td>
                     <td style="padding:0.4rem 0.9rem;font-family:'DM Mono',monospace;
                                color:{color};font-size:0.78rem;">{v:+.4f}</td>
                     <td style="padding:0.4rem 0.9rem;color:{ic};font-size:0.72rem;">
@@ -558,7 +558,7 @@ if uploaded:
 
         # Histograms
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#5a7a98;letter-spacing:1.5px;margin:1.5rem 0 0.6rem;
+                    color:#0a2540;letter-spacing:1.5px;margin:1.5rem 0 0.6rem;
                     text-transform:uppercase;">Histograms</div>""", unsafe_allow_html=True)
 
         plt.style.use('default')
@@ -586,7 +586,7 @@ if uploaded:
 
         # Scatter
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#5a7a98;letter-spacing:1.5px;margin:1rem 0 0.6rem;
+                    color:#0a2540;letter-spacing:1.5px;margin:1rem 0 0.6rem;
                     text-transform:uppercase;">Correlation Scatter</div>""", unsafe_allow_html=True)
 
         rng = np.random.default_rng(42)
@@ -640,37 +640,37 @@ else:
     st.markdown("""
     <div style="margin-top:0.8rem;padding:2.4rem;background:#e8f1fb;
                 border:1px solid rgba(42,111,168,0.15);border-radius:14px;text-align:center;">
-        <div style="font-size:2rem;opacity:0.35;margin-bottom:0.8rem;color:#2a6fa8;">◈</div>
+        <div style="font-size:2.5rem;margin-bottom:0.8rem;">🖼️</div>
         <div style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:600;
-                    color:#3a6080;letter-spacing:1px;">Upload an image to begin</div>
+                    color:#0a2540;font-weight:600;letter-spacing:1px;">Upload an image to begin</div>
         <div style="font-family:'DM Mono',monospace;font-size:0.67rem;
-                    color:#7090aa;margin-top:0.4rem;">
+                    color:#2d5070;margin-top:0.4rem;">
             JPG & PNG supported  ·  configure key parameters in sidebar</div>
     </div>
 
     <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem;">
         <div style="padding:1.2rem;background:#e8f1fb;
                     border:1px solid rgba(42,111,168,0.12);border-radius:11px;">
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#7090aa;
+            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#2d5070;
                         letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">
                 Logistic Map</div>
-            <div style="font-size:0.83rem;color:#2a6fa8;line-height:1.5;">
+            <div style="font-size:0.83rem;color:#0d3060;line-height:1.5;">
                 r·x·(1−x) — generates chaotic pseudo-random sequence</div>
         </div>
         <div style="padding:1.2rem;background:#e8f1fb;
                     border:1px solid rgba(42,111,168,0.12);border-radius:11px;">
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#7090aa;
+            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#2d5070;
                         letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">
                 Sine Map</div>
-            <div style="font-size:0.83rem;color:#2a6fa8;line-height:1.5;">
+            <div style="font-size:0.83rem;color:#0d3060;line-height:1.5;">
                 sin(π·x) — amplifies nonlinearity & unpredictability</div>
         </div>
         <div style="padding:1.2rem;background:#e8f1fb;
                     border:1px solid rgba(42,111,168,0.12);border-radius:11px;">
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#7090aa;
+            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#2d5070;
                         letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">
                 Tent Map</div>
-            <div style="font-size:0.83rem;color:#2a6fa8;line-height:1.5;">
+            <div style="font-size:0.83rem;color:#0d3060;line-height:1.5;">
                 μ·min(x, 1−x) — uniform distribution enhancement</div>
         </div>
     </div>
