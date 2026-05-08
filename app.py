@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Streamlit UI — Chaos TSL Image Cipher
-Dark Tech Edition: Biru Neon & Abu Gelap
+Full Dark Tech — Zero Light Elements
 """
 
 import streamlit as st
@@ -10,9 +10,6 @@ import matplotlib.pyplot as plt
 import math, time, io
 from PIL import Image
 
-# ─────────────────────────────────────────
-# PAGE CONFIG
-# ─────────────────────────────────────────
 st.set_page_config(
     page_title="Chaos TSL Cipher",
     page_icon="⬡",
@@ -21,105 +18,186 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────
-# CSS — DARK TECH
+# FULL DARK CSS — override SEMUA komponen Streamlit
 # ─────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;600&family=Outfit:wght@300;400;500;600&display=swap');
 
 :root {
-    --bg-base:    #080d14;
-    --bg-panel:   #0d1520;
-    --bg-card:    #111d2e;
-    --bg-hover:   #162438;
-    --neon:       #00d4ff;
-    --neon-dim:   #0099bb;
-    --neon-glow:  rgba(0,212,255,0.15);
-    --neon2:      #00ff9d;
-    --accent:     #ff4d6d;
-    --border:     rgba(0,212,255,0.18);
-    --border2:    rgba(0,212,255,0.08);
-    --text-main:  #cde8f5;
-    --text-dim:   #5a7a99;
-    --text-bright:#e8f4ff;
+    --bg:      #070c12;
+    --bg2:     #0b1219;
+    --bg3:     #0f1a24;
+    --bg4:     #132030;
+    --neon:    #00c8f0;
+    --neon2:   #00e896;
+    --red:     #ff4060;
+    --border:  rgba(0,200,240,0.15);
+    --dim:     #2a4a60;
+    --text:    #b8d8ec;
+    --muted:   #3a5a72;
 }
 
-html, body, [class*="css"] {
-    background-color: var(--bg-base) !important;
-    font-family: 'Outfit', sans-serif;
-    color: var(--text-main);
+/* ── GLOBAL ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body,
+[class*="css"],
+.stApp,
+.main,
+.block-container,
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewBlockContainer"],
+[data-testid="stVerticalBlock"],
+[data-testid="stHorizontalBlock"] {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+    font-family: 'Outfit', sans-serif !important;
 }
 
-#MainMenu, footer, header { visibility: hidden; }
+/* ── HIDE BRANDING ── */
+#MainMenu, footer, header,
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"] { display: none !important; }
 
-section[data-testid="stSidebar"] {
-    background: var(--bg-panel) !important;
+/* ── SIDEBAR ── */
+section[data-testid="stSidebar"],
+section[data-testid="stSidebar"] > div,
+section[data-testid="stSidebar"] .block-container {
+    background-color: var(--bg2) !important;
     border-right: 1px solid var(--border) !important;
 }
-section[data-testid="stSidebar"]::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--neon), transparent);
-}
 
-input[type="number"] {
-    background: #0a1520 !important;
+/* ── NUMBER INPUT ── */
+[data-testid="stNumberInput"] > div,
+[data-testid="stNumberInput"] > div > div {
+    background: var(--bg3) !important;
+    border-color: var(--border) !important;
+}
+input[type="number"],
+input[type="text"],
+input {
+    background: var(--bg3) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 6px !important;
+    border-radius: 5px !important;
     color: var(--neon) !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 1rem !important;
-    padding: 0.4rem 0.6rem !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
+    font-size: 0.95rem !important;
 }
-input[type="number"]:focus {
+input:focus {
     border-color: var(--neon) !important;
-    box-shadow: 0 0 0 2px var(--neon-glow), 0 0 12px var(--neon-glow) !important;
+    box-shadow: 0 0 0 2px rgba(0,200,240,0.12) !important;
     outline: none !important;
 }
 
-label, .stNumberInput label {
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.72rem !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1.5px !important;
-    color: var(--text-dim) !important;
+/* stepper buttons +/- */
+[data-testid="stNumberInput"] button {
+    background: var(--bg4) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--neon) !important;
+}
+[data-testid="stNumberInput"] button:hover {
+    background: rgba(0,200,240,0.1) !important;
 }
 
+/* ── LABELS ── */
+label,
+[data-testid="stWidgetLabel"],
+.stNumberInput label,
+p { color: var(--muted) !important; }
+
+/* ── FILE UPLOADER — full dark override ── */
+[data-testid="stFileUploader"],
+[data-testid="stFileUploader"] > div,
+[data-testid="stFileUploader"] section,
+[data-testid="stFileUploader"] section > div,
+[data-testid="stFileUploaderDropzone"],
+[data-testid="stFileUploaderDropzoneInstructions"] {
+    background: var(--bg3) !important;
+    border-color: var(--border) !important;
+    color: var(--muted) !important;
+}
+[data-testid="stFileUploaderDropzone"] {
+    border: 1px dashed var(--border) !important;
+    border-radius: 8px !important;
+}
+[data-testid="stFileUploader"] button {
+    background: var(--bg4) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--neon) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.75rem !important;
+    border-radius: 4px !important;
+}
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] span,
+[data-testid="stFileUploaderDropzoneInstructions"] span,
+[data-testid="stFileUploaderDropzoneInstructions"] small {
+    color: var(--muted) !important;
+}
+
+/* uploaded file pill */
+[data-testid="stFileUploaderFile"],
+[data-testid="stFileUploaderFile"] > div {
+    background: var(--bg4) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+}
+[data-testid="stFileUploaderFileName"] {
+    color: var(--text) !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.8rem !important;
+}
+[data-testid="stFileUploaderFileData"] {
+    color: var(--muted) !important;
+    font-size: 0.72rem !important;
+}
+[data-testid="stFileUploaderDeleteBtn"] button {
+    background: transparent !important;
+    border: none !important;
+    color: var(--muted) !important;
+}
+
+/* ── SUCCESS / INFO / WARNING boxes ── */
+[data-testid="stAlert"],
+.stAlert,
+div[data-baseweb="notification"],
+[class*="stSuccess"],
+[class*="stInfo"],
+[class*="stWarning"],
+[class*="stError"] {
+    background: var(--bg3) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    color: var(--neon2) !important;
+}
+[data-testid="stAlert"] p,
+[data-testid="stAlert"] span { color: var(--neon2) !important; }
+[data-testid="stAlert"] svg { fill: var(--neon2) !important; }
+
+/* ── MAIN BUTTONS ── */
 .stButton > button {
-    width: 100%;
     background: transparent !important;
     border: 1px solid var(--neon) !important;
     color: var(--neon) !important;
     font-family: 'Rajdhani', sans-serif !important;
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
     font-weight: 700 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
-    padding: 0.55rem 1.2rem !important;
+    padding: 0.5rem 1.2rem !important;
     border-radius: 4px !important;
-    transition: all 0.2s ease !important;
+    transition: all 0.2s !important;
+    width: 100% !important;
 }
 .stButton > button:hover {
-    background: var(--neon-glow) !important;
-    box-shadow: 0 0 20px var(--neon-glow), inset 0 0 20px var(--neon-glow) !important;
+    background: rgba(0,200,240,0.08) !important;
+    box-shadow: 0 0 16px rgba(0,200,240,0.2) !important;
     color: #fff !important;
 }
 
-[data-testid="stFileUploader"] {
-    background: var(--bg-card) !important;
-    border: 1px dashed var(--border) !important;
-    border-radius: 8px !important;
-    padding: 1rem !important;
-}
-
-[data-testid="stImage"] img {
-    border-radius: 6px !important;
-    border: 1px solid var(--border) !important;
-}
-
+/* ── DOWNLOAD BUTTON ── */
 [data-testid="stDownloadButton"] button {
     background: transparent !important;
     border: 1px solid var(--neon2) !important;
@@ -130,16 +208,38 @@ label, .stNumberInput label {
     letter-spacing: 1.5px !important;
     border-radius: 4px !important;
     padding: 0.4rem 1rem !important;
+    transition: all 0.2s !important;
 }
 [data-testid="stDownloadButton"] button:hover {
-    background: rgba(0,255,157,0.1) !important;
-    box-shadow: 0 0 12px rgba(0,255,157,0.2) !important;
+    background: rgba(0,232,150,0.08) !important;
+    box-shadow: 0 0 12px rgba(0,232,150,0.18) !important;
 }
 
-hr { border-color: var(--border2) !important; margin: 1.2rem 0 !important; }
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
-::-webkit-scrollbar-thumb { background: var(--neon-dim); border-radius: 2px; }
+/* ── IMAGES ── */
+[data-testid="stImage"] img {
+    border-radius: 6px !important;
+    border: 1px solid var(--border) !important;
+}
+
+/* ── SPINNER ── */
+.stSpinner > div {
+    border-top-color: var(--neon) !important;
+}
+[data-testid="stSpinner"] p { color: var(--muted) !important; }
+
+/* ── DIVIDER ── */
+hr { border-color: rgba(0,200,240,0.08) !important; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--dim); border-radius: 2px; }
+
+/* ── COLUMNS gap ── */
+[data-testid="column"] { gap: 0 !important; }
+
+/* ── Tooltip ── */
+[data-testid="stTooltipHoverTarget"] { color: var(--dim) !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -203,8 +303,7 @@ def decrypt(cipher_img, x0, r, mu, C0=125, N0=1000):
 
 def hitung_entropi(img):
     hist, _ = np.histogram(img.flatten(), bins=256, range=[0,256])
-    hist = hist[hist > 0]
-    prob = hist / hist.sum()
+    hist = hist[hist > 0]; prob = hist / hist.sum()
     return float(-np.sum(prob * np.log2(prob)))
 
 def hitung_mse_psnr(img1, img2):
@@ -216,54 +315,42 @@ def hitung_mse_psnr(img1, img2):
 def hitung_korelasi(img, n=5000):
     M, N = img.shape[:2]
     rng = np.random.default_rng(42)
-    xi = rng.integers(0, M-1, n)
-    yi = rng.integers(0, N-1, n)
-    g = img[:,:,0].astype(np.float64)
-    x_val = g[xi, yi]
+    xi = rng.integers(0, M-1, n); yi = rng.integers(0, N-1, n)
+    g = img[:,:,0].astype(np.float64); x_val = g[xi, yi]
     corr = lambda a, b: float(np.corrcoef(a, b)[0,1])
-    return corr(x_val, g[xi, yi+1]), corr(x_val, g[xi+1, yi]), corr(x_val, g[xi+1, yi+1])
+    return corr(x_val, g[xi,yi+1]), corr(x_val, g[xi+1,yi]), corr(x_val, g[xi+1,yi+1])
 
 def hitung_npcr_uaci(c1, c2):
     a, b = c1.astype(np.float64), c2.astype(np.float64)
     L = a.size
-    D = (a != b).astype(np.float64)
-    return float(D.sum()/L*100), float(np.abs(a-b).sum()/(255.0*L)*100)
+    return float((a!=b).sum()/L*100), float(np.abs(a-b).sum()/(255.0*L)*100)
 
 def fig_bytes(fig):
     buf = io.BytesIO()
     fig.savefig(buf, format='png', dpi=130, bbox_inches='tight',
-                facecolor='#080d14', edgecolor='none')
-    buf.seek(0)
-    return buf
+                facecolor='#070c12', edgecolor='none')
+    buf.seek(0); return buf
 
 # ─────────────────────────────────────────
 # HEADER
 # ─────────────────────────────────────────
 st.markdown("""
-<div style="
-    padding: 2.2rem 2.5rem 1.8rem;
-    background: linear-gradient(135deg, #0d1520 0%, #091622 50%, #0d1a28 100%);
-    border: 1px solid rgba(0,212,255,0.2);
-    border-radius: 10px;
-    margin-bottom: 1.8rem;
-    position: relative;
-    overflow: hidden;
-">
+<div style="padding:2rem 2.4rem 1.7rem;
+            background:linear-gradient(135deg,#0b1219,#0a1520);
+            border:1px solid rgba(0,200,240,0.18);border-radius:10px;
+            margin-bottom:1.6rem;position:relative;overflow:hidden;">
     <div style="position:absolute;top:0;left:0;right:0;height:2px;
-                background:linear-gradient(90deg,transparent 0%,#00d4ff 40%,#00ff9d 70%,transparent 100%);"></div>
-    <div style="display:flex; align-items:center; gap:1.2rem;">
-        <div style="width:52px;height:52px;border-radius:8px;
-                    background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);
-                    display:flex;align-items:center;justify-content:center;font-size:1.6rem;">⬡</div>
+                background:linear-gradient(90deg,transparent,#00c8f0 45%,#00e896 75%,transparent);"></div>
+    <div style="display:flex;align-items:center;gap:1.1rem;">
+        <div style="width:48px;height:48px;border-radius:8px;
+                    background:rgba(0,200,240,0.08);border:1px solid rgba(0,200,240,0.25);
+                    display:flex;align-items:center;justify-content:center;font-size:1.5rem;">⬡</div>
         <div>
-            <div style="font-family:'Rajdhani',sans-serif;font-size:1.75rem;font-weight:700;
-                        color:#e8f4ff;letter-spacing:2px;line-height:1.1;">
-                CHAOS TSL CIPHER
-            </div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;
-                        color:#00d4ff;letter-spacing:3px;margin-top:3px;">
-                LOGISTIC → SINE → TENT  //  IMAGE ENCRYPTION SYSTEM
-            </div>
+            <div style="font-family:'Rajdhani',sans-serif;font-size:1.65rem;font-weight:700;
+                        color:#daeeff;letter-spacing:2.5px;">CHAOS TSL CIPHER</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+                        color:#00c8f0;letter-spacing:3px;margin-top:2px;">
+                LOGISTIC → SINE → TENT  //  IMAGE ENCRYPTION SYSTEM</div>
         </div>
     </div>
 </div>
@@ -274,80 +361,68 @@ st.markdown("""
 # ─────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
-    <div style="padding:1.2rem 0 0.5rem;">
-        <div style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:700;
-                    color:#00d4ff;letter-spacing:3px;text-transform:uppercase;">⬡ Key Parameters</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
-                    color:#3a6080;letter-spacing:1px;margin-top:2px;">// cipher configuration</div>
+    <div style="padding:1rem 0 0.4rem;">
+        <div style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:700;
+                    color:#00c8f0;letter-spacing:3px;">⬡ KEY PARAMETERS</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+                    color:#2a4a60;margin-top:2px;letter-spacing:1px;">// cipher configuration</div>
     </div>
     """, unsafe_allow_html=True)
     st.markdown("---")
 
-    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
-                color:#3a6080;letter-spacing:2px;margin-bottom:0.8rem;">[ CHAOS MAP PARAMS ]</div>""",
+    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+                color:#2a4a60;letter-spacing:2px;margin-bottom:0.7rem;">[ CHAOS MAP PARAMS ]</div>""",
                 unsafe_allow_html=True)
 
     x0 = st.number_input("x₀  —  Initial Condition",
         min_value=0.000001, max_value=0.999999, value=0.456789,
         step=0.000001, format="%.6f",
-        help="Kondisi awal chaos map. Kunci utama — beda sedikit = cipher beda total.")
-
-    r = st.number_input("r  —  Logistic Rate",
+        help="Kondisi awal chaos. Kunci utama — ubah sedikit = cipher beda total.")
+    r  = st.number_input("r  —  Logistic Rate",
         min_value=2.5, max_value=4.0, value=3.95,
-        step=0.01, format="%.4f",
-        help="r > 3.57 = chaos. Ideal: mendekati 4.0")
-
+        step=0.01, format="%.4f", help="r > 3.57 = chaos. Ideal mendekati 4.0")
     mu = st.number_input("μ  —  Tent Parameter",
         min_value=1.0, max_value=2.0, value=2.0,
-        step=0.01, format="%.4f",
-        help="μ = 2.0 menghasilkan chaos penuh.")
+        step=0.01, format="%.4f", help="μ = 2.0 = chaos penuh")
 
-    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
-                color:#3a6080;letter-spacing:2px;margin:1rem 0 0.8rem;">[ DIFFUSION PARAMS ]</div>""",
+    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;
+                color:#2a4a60;letter-spacing:2px;margin:1rem 0 0.7rem;">[ DIFFUSION PARAMS ]</div>""",
                 unsafe_allow_html=True)
 
     C0 = st.number_input("C₀  —  Diffusion Seed",
-        min_value=0, max_value=255, value=125, step=1, format="%d",
-        help="Seed difusi XOR berantai.")
-
+        min_value=0, max_value=255, value=125, step=1, format="%d")
     N0 = st.number_input("N₀  —  Warm-up Iterations",
-        min_value=100, max_value=5000, value=1000, step=100, format="%d",
-        help="Iterasi pembuangan transien chaos.")
+        min_value=100, max_value=5000, value=1000, step=100, format="%d")
 
     st.markdown("---")
-
     st.markdown(f"""
-    <div style="background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);
-                border-radius:8px;padding:1rem 1.1rem;font-family:'JetBrains Mono',monospace;">
-        <div style="font-size:0.62rem;color:#3a6080;letter-spacing:2px;margin-bottom:0.7rem;">
-            // ACTIVE KEY
+    <div style="background:rgba(0,200,240,0.04);border:1px solid rgba(0,200,240,0.15);
+                border-radius:7px;padding:0.9rem 1rem;font-family:'JetBrains Mono',monospace;">
+        <div style="font-size:0.6rem;color:#2a4a60;letter-spacing:2px;margin-bottom:0.6rem;">
+            // ACTIVE KEY</div>
+        <div style="font-size:0.73rem;line-height:2;color:#00c8f0;">
+            x₀ <span style="color:#b8d8ec;">= {x0:.6f}</span><br>
+            r &nbsp;<span style="color:#b8d8ec;">= {r:.4f}</span><br>
+            μ &nbsp;<span style="color:#b8d8ec;">= {mu:.4f}</span><br>
+            C₀ <span style="color:#b8d8ec;">= {C0}</span> &nbsp;&nbsp;
+            N₀ <span style="color:#b8d8ec;">= {N0}</span>
         </div>
-        <div style="font-size:0.75rem;line-height:1.9;color:#00d4ff;">
-            x₀ <span style="color:#cde8f5;">= {x0:.6f}</span><br>
-            r &nbsp;<span style="color:#cde8f5;">= {r:.4f}</span><br>
-            μ &nbsp;<span style="color:#cde8f5;">= {mu:.4f}</span><br>
-            C₀ <span style="color:#cde8f5;">= {C0}</span><br>
-            N₀ <span style="color:#cde8f5;">= {N0}</span>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    </div>""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-
     chaos_ok = r >= 3.57 and mu >= 1.8 and 0.01 < x0 < 0.99
-    color_ind = "#00ff9d" if chaos_ok else "#ff4d6d"
-    bg_ind = "rgba(0,255,157,0.07)" if chaos_ok else "rgba(255,77,109,0.07)"
-    border_ind = "rgba(0,255,157,0.25)" if chaos_ok else "rgba(255,77,109,0.25)"
-    label_ind = "CHAOS REGIME OPTIMAL" if chaos_ok else "SUBOPTIMAL — CHECK r, μ"
+    c = "#00e896" if chaos_ok else "#ff4060"
+    bg = f"rgba({'0,232,150' if chaos_ok else '255,64,96'},0.06)"
+    bd = f"rgba({'0,232,150' if chaos_ok else '255,64,96'},0.22)"
+    lbl = "CHAOS REGIME OPTIMAL" if chaos_ok else "SUBOPTIMAL — CHECK r, μ"
     st.markdown(f"""
-    <div style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.8rem;
-                background:{bg_ind};border:1px solid {border_ind};border-radius:6px;
-                font-family:'JetBrains Mono',monospace;font-size:0.7rem;">
-        <div style="width:8px;height:8px;border-radius:50%;background:{color_ind};
-                    box-shadow:0 0 6px {color_ind};flex-shrink:0;"></div>
-        <span style="color:{color_ind};">{label_ind}</span>
-    </div>
-    """, unsafe_allow_html=True)
+    <div style="display:flex;align-items:center;gap:0.5rem;padding:0.55rem 0.8rem;
+                background:{bg};border:1px solid {bd};border-radius:5px;
+                font-family:'JetBrains Mono',monospace;font-size:0.68rem;">
+        <div style="width:7px;height:7px;border-radius:50%;background:{c};
+                    box-shadow:0 0 5px {c};flex-shrink:0;"></div>
+        <span style="color:{c};">{lbl}</span>
+    </div>""", unsafe_allow_html=True)
 
 # ─────────────────────────────────────────
 # MAIN
@@ -355,15 +430,14 @@ with st.sidebar:
 col_up, col_btn = st.columns([3, 1])
 
 with col_up:
-    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                color:#3a6080;letter-spacing:2px;margin-bottom:0.5rem;">// INPUT IMAGE</div>""",
+    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                color:#2a4a60;letter-spacing:2px;margin-bottom:0.4rem;">// INPUT IMAGE</div>""",
                 unsafe_allow_html=True)
-    uploaded = st.file_uploader("Upload gambar (JPG / PNG)", type=["jpg","jpeg","png"],
-                                label_visibility="collapsed")
+    uploaded = st.file_uploader("img", type=["jpg","jpeg","png"], label_visibility="collapsed")
 
 with col_btn:
-    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                color:#3a6080;letter-spacing:2px;margin-bottom:0.5rem;">// EXECUTE</div>""",
+    st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                color:#2a4a60;letter-spacing:2px;margin-bottom:0.4rem;">// EXECUTE</div>""",
                 unsafe_allow_html=True)
     run_enc = st.button("⬡  ENCRYPT", use_container_width=True)
     run_dec = st.button("◈  DECRYPT", use_container_width=True)
@@ -377,167 +451,166 @@ if uploaded:
     M, N, ch = plain.shape
 
     st.markdown(f"""
-    <div style="display:flex;gap:2rem;align-items:center;
-                background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.12);
-                border-radius:6px;padding:0.7rem 1.2rem;
-                font-family:'JetBrains Mono',monospace;font-size:0.75rem;
-                color:#5a7a99;margin-bottom:0.5rem;">
-        <span>SHAPE <span style="color:#00d4ff;">{M} × {N} × {ch}</span></span>
-        <span>PIXELS <span style="color:#00d4ff;">{M*N:,}</span></span>
-        <span>TOTAL BYTES <span style="color:#00d4ff;">{M*N*ch:,}</span></span>
-    </div>
-    """, unsafe_allow_html=True)
+    <div style="display:flex;gap:2rem;background:rgba(0,200,240,0.03);
+                border:1px solid rgba(0,200,240,0.1);border-radius:5px;
+                padding:0.6rem 1.1rem;font-family:'JetBrains Mono',monospace;
+                font-size:0.72rem;color:#3a5a72;margin-bottom:0.4rem;">
+        <span>SHAPE <span style="color:#00c8f0;">{M}×{N}×{ch}</span></span>
+        <span>PIXELS <span style="color:#00c8f0;">{M*N:,}</span></span>
+        <span>BYTES <span style="color:#00c8f0;">{M*N*ch:,}</span></span>
+    </div>""", unsafe_allow_html=True)
 
     if run_enc:
         with st.spinner("Generating chaos sequence..."):
             t0 = time.perf_counter()
             cipher, K_seq = encrypt(plain, x0, r, mu, C0, N0)
             t_enc = time.perf_counter() - t0
-
         with st.spinner("Verifying decryption..."):
             t0 = time.perf_counter()
             decrypted = decrypt(cipher, x0, r, mu, C0, N0)
             t_dec = time.perf_counter() - t0
 
-        st.success(f"✓  Encryption: {t_enc:.3f}s   |   Decryption: {t_dec:.3f}s")
+        # custom success — avoid light alert box
+        st.markdown(f"""
+        <div style="background:rgba(0,232,150,0.06);border:1px solid rgba(0,232,150,0.22);
+                    border-radius:6px;padding:0.6rem 1.1rem;margin-bottom:0.5rem;
+                    font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:#00e896;">
+            ✓ &nbsp;Encryption: {t_enc:.3f}s &nbsp;|&nbsp; Decryption: {t_dec:.3f}s
+        </div>""", unsafe_allow_html=True)
 
         # Images
-        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                    color:#3a6080;letter-spacing:2px;margin:1.2rem 0 0.6rem;">// VISUAL OUTPUT</div>""",
+        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                    color:#2a4a60;letter-spacing:2px;margin:1.1rem 0 0.5rem;">// VISUAL OUTPUT</div>""",
                     unsafe_allow_html=True)
-
         c1, c2, c3 = st.columns(3)
-        with c1:
-            st.markdown("<div style='font-family:JetBrains Mono,monospace;font-size:0.7rem;color:#5a7a99;letter-spacing:1px;margin-bottom:4px;'>PLAINTEXT</div>", unsafe_allow_html=True)
-            st.image(plain, use_container_width=True)
-        with c2:
-            st.markdown("<div style='font-family:JetBrains Mono,monospace;font-size:0.7rem;color:#00d4ff;letter-spacing:1px;margin-bottom:4px;'>CIPHERTEXT</div>", unsafe_allow_html=True)
-            st.image(cipher, use_container_width=True)
-        with c3:
-            st.markdown("<div style='font-family:JetBrains Mono,monospace;font-size:0.7rem;color:#00ff9d;letter-spacing:1px;margin-bottom:4px;'>DECRYPTED</div>", unsafe_allow_html=True)
-            st.image(decrypted, use_container_width=True)
+        for col, img, lbl, clr in [
+            (c1, plain,     "PLAINTEXT",  "#3a5a72"),
+            (c2, cipher,    "CIPHERTEXT", "#00c8f0"),
+            (c3, decrypted, "DECRYPTED",  "#00e896"),
+        ]:
+            with col:
+                st.markdown(f"<div style='font-family:JetBrains Mono,monospace;font-size:0.68rem;"
+                            f"color:{clr};letter-spacing:1px;margin-bottom:4px;'>{lbl}</div>",
+                            unsafe_allow_html=True)
+                st.image(img, use_container_width=True)
 
         buf_c = io.BytesIO()
         Image.fromarray(cipher).save(buf_c, format='PNG')
         st.download_button("↓  DOWNLOAD CIPHER IMAGE", data=buf_c.getvalue(),
                            file_name="cipher_tsl.png", mime="image/png")
 
-        # Metrics
-        ent_cipher  = hitung_entropi(cipher)
-        mse_val, psnr_val = hitung_mse_psnr(plain, cipher)
-        corr_plain  = hitung_korelasi(plain)
-        corr_cipher = hitung_korelasi(cipher)
-        plain_mod = plain.copy(); plain_mod[0,0,0] ^= 1
-        cipher_mod, _ = encrypt(plain_mod, x0, r, mu, C0, N0)
-        npcr, uaci = hitung_npcr_uaci(cipher, cipher_mod)
+        # ── Metrics ──
+        ent_c = hitung_entropi(cipher)
+        mse_v, psnr_v = hitung_mse_psnr(plain, cipher)
+        corr_p = hitung_korelasi(plain)
+        corr_c = hitung_korelasi(cipher)
+        pm = plain.copy(); pm[0,0,0] ^= 1
+        cm, _ = encrypt(pm, x0, r, mu, C0, N0)
+        npcr, uaci = hitung_npcr_uaci(cipher, cm)
 
-        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                    color:#3a6080;letter-spacing:2px;margin:1.5rem 0 0.8rem;">// SECURITY ANALYSIS</div>""",
+        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                    color:#2a4a60;letter-spacing:2px;margin:1.4rem 0 0.7rem;">// SECURITY ANALYSIS</div>""",
                     unsafe_allow_html=True)
 
-        def metric_card(col, label, val_str, sub, ok):
-            color = "#00ff9d" if ok else "#ff4d6d"
-            glow  = "rgba(0,255,157,0.15)" if ok else "rgba(255,77,109,0.15)"
+        def mcard(col, label, val, sub, ok):
+            c = "#00e896" if ok else "#ff4060"
+            g = f"rgba({'0,232,150' if ok else '255,64,96'},0.12)"
             col.markdown(f"""
-            <div style="background:#111d2e;border:1px solid {color}33;border-top:2px solid {color};
-                        border-radius:8px;padding:1.1rem 1rem 0.9rem;text-align:center;">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;
-                            color:#3a6080;letter-spacing:1.5px;text-transform:uppercase;">{label}</div>
-                <div style="font-family:'Rajdhani',sans-serif;font-size:1.7rem;font-weight:700;
-                            color:{color};margin:0.3rem 0 0.1rem;text-shadow:0 0 12px {glow};">{val_str}</div>
-                <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:{color}88;">{sub}</div>
-            </div>
-            """, unsafe_allow_html=True)
+            <div style="background:#0f1a24;border:1px solid {c}28;border-top:2px solid {c};
+                        border-radius:7px;padding:1rem 0.9rem 0.8rem;text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+                            color:#2a4a60;letter-spacing:1.5px;text-transform:uppercase;">{label}</div>
+                <div style="font-family:'Rajdhani',sans-serif;font-size:1.6rem;font-weight:700;
+                            color:{c};margin:0.25rem 0 0.1rem;text-shadow:0 0 10px {g};">{val}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:{c}66;">{sub}</div>
+            </div>""", unsafe_allow_html=True)
 
         m1,m2,m3,m4,m5 = st.columns(5)
-        metric_card(m1, "Entropy",  f"{ent_cipher:.4f}", "target > 7.9",   ent_cipher > 7.9)
-        metric_card(m2, "PSNR",     f"{psnr_val:.2f}",   "dB  /  < 10",    psnr_val < 10)
-        metric_card(m3, "MSE",      f"{mse_val:.0f}",    "target > 5000",  mse_val > 5000)
-        metric_card(m4, "NPCR",     f"{npcr:.3f}%",      "target > 99.6%", npcr > 99.6)
-        metric_card(m5, "UACI",     f"{uaci:.3f}%",      "target ≈ 33.46%",30 < uaci < 36)
+        mcard(m1, "Entropy", f"{ent_c:.4f}", "> 7.9",       ent_c > 7.9)
+        mcard(m2, "PSNR",    f"{psnr_v:.2f}","dB / < 10",   psnr_v < 10)
+        mcard(m3, "MSE",     f"{mse_v:.0f}", "> 5000",       mse_v > 5000)
+        mcard(m4, "NPCR",    f"{npcr:.3f}%", "> 99.6%",      npcr > 99.6)
+        mcard(m5, "UACI",    f"{uaci:.3f}%", "≈ 33.46%",     30 < uaci < 36)
 
-        # Correlation table
-        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                    color:#3a6080;letter-spacing:2px;margin:1.5rem 0 0.8rem;">// PIXEL CORRELATION</div>""",
+        # ── Correlation ──
+        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                    color:#2a4a60;letter-spacing:2px;margin:1.4rem 0 0.7rem;">// PIXEL CORRELATION</div>""",
                     unsafe_allow_html=True)
-
         ct1, ct2 = st.columns(2)
-        def corr_table(col, title, corrs, color):
+
+        def corr_tbl(col, title, corrs, color):
             rows = ""
-            for arah, val in zip(["Horizontal","Vertikal","Diagonal"], corrs):
-                ok = abs(val) < 0.05
-                ind_color = "#00ff9d" if ok else "#ff4d6d"
+            for nm, v in zip(["Horizontal","Vertikal","Diagonal"], corrs):
+                ok = abs(v) < 0.05
+                ic = "#00e896" if ok else "#ff4060"
                 rows += f"""<tr>
-                    <td style="padding:0.4rem 0.8rem;color:#5a7a99;font-size:0.72rem;">{arah}</td>
-                    <td style="padding:0.4rem 0.8rem;font-family:'JetBrains Mono',monospace;
-                               color:{color};font-size:0.8rem;">{val:+.4f}</td>
-                    <td style="padding:0.4rem 0.8rem;color:{ind_color};font-size:0.75rem;">
+                    <td style="padding:0.38rem 0.8rem;color:#3a5a72;font-size:0.7rem;">{nm}</td>
+                    <td style="padding:0.38rem 0.8rem;font-family:'JetBrains Mono',monospace;
+                               color:{color};font-size:0.78rem;">{v:+.4f}</td>
+                    <td style="padding:0.38rem 0.8rem;color:{ic};font-size:0.72rem;">
                         {'✓' if ok else '✗'}</td></tr>"""
             col.markdown(f"""
-            <div style="background:#111d2e;border:1px solid rgba(0,212,255,0.12);
-                        border-radius:8px;overflow:hidden;">
-                <div style="padding:0.7rem 1rem;border-bottom:1px solid rgba(0,212,255,0.1);
-                            font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+            <div style="background:#0f1a24;border:1px solid rgba(0,200,240,0.1);border-radius:7px;overflow:hidden;">
+                <div style="padding:0.6rem 0.9rem;border-bottom:1px solid rgba(0,200,240,0.08);
+                            font-family:'JetBrains Mono',monospace;font-size:0.65rem;
                             color:{color};letter-spacing:1px;">{title}</div>
                 <table style="width:100%;border-collapse:collapse;">{rows}</table>
             </div>""", unsafe_allow_html=True)
 
-        corr_table(ct1, "// PLAINTEXT", corr_plain,  "#5a9fd4")
-        corr_table(ct2, "// CIPHERTEXT  (ideal ≈ 0)", corr_cipher, "#00d4ff")
+        corr_tbl(ct1, "// PLAINTEXT",           corr_p, "#3a7a9a")
+        corr_tbl(ct2, "// CIPHERTEXT  (≈ 0)", corr_c, "#00c8f0")
 
-        # Histograms
-        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                    color:#3a6080;letter-spacing:2px;margin:1.5rem 0 0.8rem;">// HISTOGRAMS</div>""",
+        # ── Histograms ──
+        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                    color:#2a4a60;letter-spacing:2px;margin:1.4rem 0 0.6rem;">// HISTOGRAMS</div>""",
                     unsafe_allow_html=True)
-
         plt.style.use('dark_background')
-        fig_h, axes = plt.subplots(1, 2, figsize=(13, 4))
-        fig_h.patch.set_facecolor('#080d14')
-        colors = ('#ff4d6d', '#00d4ff', '#00ff9d')
+        fig_h, axes = plt.subplots(1, 2, figsize=(13, 3.8))
+        fig_h.patch.set_facecolor('#070c12')
         for ax in axes:
-            ax.set_facecolor('#0d1520')
-            for sp in ax.spines.values(): sp.set_color('#162438')
-            ax.tick_params(colors='#3a6080', labelsize=8)
-            ax.grid(axis='y', color='#162438', linewidth=0.5, alpha=0.5)
-        for i, (c, lbl) in enumerate(zip(colors, ('R','G','B'))):
-            h, _ = np.histogram(plain[:,:,i].ravel(), 256, [0,256])
-            axes[0].plot(h, color=c, alpha=0.8, label=lbl, linewidth=1.1)
-        axes[0].set_title("Plaintext Histogram", color='#5a9fd4', fontsize=10, pad=10)
-        axes[0].legend(labelcolor='#cde8f5', fontsize=8)
-        for i, (c, lbl) in enumerate(zip(colors, ('R','G','B'))):
-            h, _ = np.histogram(cipher[:,:,i].ravel(), 256, [0,256])
-            axes[1].plot(h, color=c, alpha=0.8, label=lbl, linewidth=1.1)
-        axes[1].set_title("Ciphertext Histogram  [ uniform = secure ]", color='#00d4ff', fontsize=10, pad=10)
-        axes[1].legend(labelcolor='#cde8f5', fontsize=8)
-        plt.tight_layout(pad=2)
+            ax.set_facecolor('#0b1219')
+            for sp in ax.spines.values(): sp.set_color('#132030')
+            ax.tick_params(colors='#2a4a60', labelsize=8)
+            ax.grid(axis='y', color='#0f1a24', linewidth=0.6)
+        clrs = ('#ff4060','#00c8f0','#00e896')
+        for i,(c,l) in enumerate(zip(clrs,('R','G','B'))):
+            h,_ = np.histogram(plain[:,:,i].ravel(),256,[0,256])
+            axes[0].plot(h, color=c, alpha=0.75, label=l, linewidth=1)
+        axes[0].set_title("Plaintext",  color='#3a7a9a', fontsize=9, pad=8)
+        axes[0].legend(labelcolor='#b8d8ec', fontsize=8)
+        for i,(c,l) in enumerate(zip(clrs,('R','G','B'))):
+            h,_ = np.histogram(cipher[:,:,i].ravel(),256,[0,256])
+            axes[1].plot(h, color=c, alpha=0.75, label=l, linewidth=1)
+        axes[1].set_title("Ciphertext  [ uniform = secure ]", color='#00c8f0', fontsize=9, pad=8)
+        axes[1].legend(labelcolor='#b8d8ec', fontsize=8)
+        plt.tight_layout(pad=1.5)
         st.image(fig_bytes(fig_h), use_container_width=True)
         plt.close(fig_h)
 
-        # Scatter
-        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;
-                    color:#3a6080;letter-spacing:2px;margin:1rem 0 0.8rem;">// CORRELATION SCATTER</div>""",
+        # ── Scatter ──
+        st.markdown("""<div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+                    color:#2a4a60;letter-spacing:2px;margin:1rem 0 0.6rem;">// CORRELATION SCATTER</div>""",
                     unsafe_allow_html=True)
-
         rng = np.random.default_rng(42)
-        xi  = rng.integers(0, M-1, 2000); yi = rng.integers(0, N-1, 2000)
-        gp  = plain[:,:,0].astype(np.float64); gc = cipher[:,:,0].astype(np.float64)
-        fig_s, axs = plt.subplots(3, 2, figsize=(10, 10))
-        fig_s.patch.set_facecolor('#080d14')
+        xi = rng.integers(0, M-1, 2000); yi = rng.integers(0, N-1, 2000)
+        gp = plain[:,:,0].astype(np.float64); gc = cipher[:,:,0].astype(np.float64)
+        fig_s, axs = plt.subplots(3, 2, figsize=(10, 9))
+        fig_s.patch.set_facecolor('#070c12')
         dirs = [
             ("Horizontal", gp[xi,yi], gp[xi,yi+1], gc[xi,yi], gc[xi,yi+1]),
             ("Vertical",   gp[xi,yi], gp[xi+1,yi], gc[xi,yi], gc[xi+1,yi]),
             ("Diagonal",   gp[xi,yi], gp[xi+1,yi+1], gc[xi,yi], gc[xi+1,yi+1]),
         ]
-        for i, (nm, px, py, cx, cy) in enumerate(dirs):
-            for j, ax in enumerate(axs[i]):
-                ax.set_facecolor('#0d1520')
-                for sp in ax.spines.values(): sp.set_color('#162438')
-                ax.tick_params(colors='#3a6080', labelsize=7)
-            axs[i,0].scatter(px, py, s=1.5, alpha=0.35, color='#5a9fd4')
-            axs[i,0].set_title(f"Plain — {nm}  r={corr_plain[i]:.4f}", color='#5a9fd4', fontsize=8)
-            axs[i,1].scatter(cx, cy, s=1.5, alpha=0.35, color='#00d4ff')
-            axs[i,1].set_title(f"Cipher — {nm}  r={corr_cipher[i]:.4f}", color='#00d4ff', fontsize=8)
-        plt.tight_layout(pad=2)
+        for i,(nm,px,py,cx,cy) in enumerate(dirs):
+            for ax in axs[i]:
+                ax.set_facecolor('#0b1219')
+                for sp in ax.spines.values(): sp.set_color('#132030')
+                ax.tick_params(colors='#2a4a60', labelsize=7)
+            axs[i,0].scatter(px, py, s=1.2, alpha=0.3, color='#3a7a9a')
+            axs[i,0].set_title(f"Plain — {nm}  r={corr_p[i]:.4f}", color='#3a7a9a', fontsize=8)
+            axs[i,1].scatter(cx, cy, s=1.2, alpha=0.3, color='#00c8f0')
+            axs[i,1].set_title(f"Cipher — {nm}  r={corr_c[i]:.4f}", color='#00c8f0', fontsize=8)
+        plt.tight_layout(pad=1.5)
         st.image(fig_bytes(fig_s), use_container_width=True)
         plt.close(fig_s)
 
@@ -551,7 +624,12 @@ if uploaded:
             t0 = time.perf_counter()
             result = decrypt(plain, x0, r, mu, C0, N0)
             t_dec = time.perf_counter() - t0
-        st.success(f"✓  Decryption complete: {t_dec:.3f}s")
+        st.markdown(f"""
+        <div style="background:rgba(0,232,150,0.06);border:1px solid rgba(0,232,150,0.22);
+                    border-radius:6px;padding:0.6rem 1.1rem;margin-bottom:0.5rem;
+                    font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:#00e896;">
+            ✓ &nbsp;Decryption complete: {t_dec:.3f}s
+        </div>""", unsafe_allow_html=True)
         d1, d2 = st.columns(2)
         d1.image(plain,  caption="Input (Cipher)", use_container_width=True)
         d2.image(result, caption="Decrypted",      use_container_width=True)
@@ -562,29 +640,27 @@ if uploaded:
 
 else:
     st.markdown("""
-    <div style="margin-top:1rem;padding:2.5rem;background:#111d2e;
-                border:1px solid rgba(0,212,255,0.1);border-radius:10px;text-align:center;">
-        <div style="font-size:2.5rem;margin-bottom:1rem;opacity:0.3;">⬡</div>
-        <div style="font-family:'Rajdhani',sans-serif;font-size:1.1rem;font-weight:600;
-                    color:#5a7a99;letter-spacing:2px;">UPLOAD AN IMAGE TO BEGIN</div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;
-                    color:#3a6080;margin-top:0.5rem;letter-spacing:1px;">
-            // supports JPG & PNG  ·  configure key parameters in sidebar
-        </div>
+    <div style="margin-top:0.8rem;padding:2.2rem;background:#0f1a24;
+                border:1px solid rgba(0,200,240,0.08);border-radius:9px;text-align:center;">
+        <div style="font-size:2rem;opacity:0.2;margin-bottom:0.8rem;">⬡</div>
+        <div style="font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:600;
+                    color:#3a5a72;letter-spacing:2px;">UPLOAD AN IMAGE TO BEGIN</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.67rem;
+                    color:#2a4a60;margin-top:0.4rem;">
+            // JPG & PNG supported  ·  set key parameters in sidebar</div>
     </div>
-
-    <div style="margin-top:1.2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
-        <div style="padding:1.2rem;background:#111d2e;border:1px solid rgba(0,212,255,0.1);border-radius:8px;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3a6080;letter-spacing:1.5px;margin-bottom:0.5rem;">// LOGISTIC MAP</div>
-            <div style="font-size:0.85rem;color:#5a9fd4;">r·x·(1−x) — generates chaotic pseudo-random sequence</div>
+    <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;">
+        <div style="padding:1.1rem;background:#0f1a24;border:1px solid rgba(0,200,240,0.08);border-radius:7px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#2a4a60;letter-spacing:1.5px;margin-bottom:0.4rem;">// LOGISTIC MAP</div>
+            <div style="font-size:0.82rem;color:#3a7a9a;">r·x·(1−x) — generates chaotic pseudo-random sequence</div>
         </div>
-        <div style="padding:1.2rem;background:#111d2e;border:1px solid rgba(0,212,255,0.1);border-radius:8px;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3a6080;letter-spacing:1.5px;margin-bottom:0.5rem;">// SINE MAP</div>
-            <div style="font-size:0.85rem;color:#5a9fd4;">sin(π·x) — amplifies nonlinearity & unpredictability</div>
+        <div style="padding:1.1rem;background:#0f1a24;border:1px solid rgba(0,200,240,0.08);border-radius:7px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#2a4a60;letter-spacing:1.5px;margin-bottom:0.4rem;">// SINE MAP</div>
+            <div style="font-size:0.82rem;color:#3a7a9a;">sin(π·x) — amplifies nonlinearity & unpredictability</div>
         </div>
-        <div style="padding:1.2rem;background:#111d2e;border:1px solid rgba(0,212,255,0.1);border-radius:8px;">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:#3a6080;letter-spacing:1.5px;margin-bottom:0.5rem;">// TENT MAP</div>
-            <div style="font-size:0.85rem;color:#5a9fd4;">μ·min(x, 1−x) — uniform distribution enhancement</div>
+        <div style="padding:1.1rem;background:#0f1a24;border:1px solid rgba(0,200,240,0.08);border-radius:7px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#2a4a60;letter-spacing:1.5px;margin-bottom:0.4rem;">// TENT MAP</div>
+            <div style="font-size:0.82rem;color:#3a7a9a;">μ·min(x, 1−x) — uniform distribution enhancement</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
