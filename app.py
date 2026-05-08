@@ -22,24 +22,24 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&family=Sora:wght@300;400;600;700&display=swap');
 
 :root {
-    --bg:       #141c26;
-    --bg2:      #1a2433;
-    --bg3:      #1f2d3d;
-    --bg4:      #253547;
-    --bg5:      #2c3e52;
-    --sky:      #a8d8f0;
-    --sky2:     #c5e8f8;
-    --sky3:     #7bbfe8;
-    --cream:    #f0ece4;
-    --cream2:   #e8e2d8;
-    --mint:     #a8e6d4;
-    --rose:     #f0a8b8;
-    --lavender: #c8b8f0;
-    --border:   rgba(168,216,240,0.18);
-    --border2:  rgba(168,216,240,0.08);
-    --text:     #d8eaf5;
-    --muted:    #6a8fa8;
-    --dimmer:   #3a5568;
+    --bg:       #f0f6ff;
+    --bg2:      #e8f1fb;
+    --bg3:      #ddeaf8;
+    --bg4:      #d0e1f5;
+    --bg5:      #c2d7f0;
+    --sky:      #2a6fa8;
+    --sky2:     #1d5a8e;
+    --sky3:     #3a80bb;
+    --cream:    #2d2a26;
+    --cream2:   #3a3630;
+    --mint:     #1a7a5e;
+    --rose:     #c0284a;
+    --lavender: #5a3ea0;
+    --border:   rgba(42,111,168,0.22);
+    --border2:  rgba(42,111,168,0.10);
+    --text:     #1a2e42;
+    --muted:    #3a6080;
+    --dimmer:   #7090aa;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -85,7 +85,7 @@ input[type="number"], input[type="text"], input {
 }
 input:focus {
     border-color: var(--sky) !important;
-    box-shadow: 0 0 0 3px rgba(168,216,240,0.1) !important;
+    box-shadow: 0 0 0 3px rgba(42,111,168,0.12) !important;
     outline: none !important;
 }
 [data-testid="stNumberInput"] button {
@@ -116,7 +116,7 @@ label, [data-testid="stWidgetLabel"], p {
     color: var(--muted) !important;
 }
 [data-testid="stFileUploaderDropzone"] {
-    border: 1.5px dashed rgba(168,216,240,0.25) !important;
+    border: 1.5px dashed rgba(42,111,168,0.35) !important;
     border-radius: 10px !important;
 }
 [data-testid="stFileUploader"] button {
@@ -153,8 +153,8 @@ label, [data-testid="stWidgetLabel"], p {
 
 /* ── BUTTONS ── */
 .stButton > button {
-    background: rgba(168,216,240,0.08) !important;
-    border: 1.5px solid rgba(168,216,240,0.35) !important;
+    background: rgba(42,111,168,0.10) !important;
+    border: 1.5px solid rgba(42,111,168,0.45) !important;
     color: var(--sky2) !important;
     font-family: 'Sora', sans-serif !important;
     font-size: 0.88rem !important;
@@ -166,16 +166,16 @@ label, [data-testid="stWidgetLabel"], p {
     width: 100% !important;
 }
 .stButton > button:hover {
-    background: rgba(168,216,240,0.16) !important;
+    background: rgba(42,111,168,0.18) !important;
     border-color: var(--sky) !important;
-    box-shadow: 0 4px 20px rgba(168,216,240,0.15) !important;
-    color: #fff !important;
+    box-shadow: 0 4px 20px rgba(42,111,168,0.18) !important;
+    color: var(--sky2) !important;
 }
 
 /* ── DOWNLOAD BUTTON ── */
 [data-testid="stDownloadButton"] button {
-    background: rgba(168,230,212,0.08) !important;
-    border: 1.5px solid rgba(168,230,212,0.35) !important;
+    background: rgba(26,122,94,0.09) !important;
+    border: 1.5px solid rgba(26,122,94,0.40) !important;
     color: var(--mint) !important;
     font-family: 'Sora', sans-serif !important;
     font-size: 0.82rem !important;
@@ -186,8 +186,8 @@ label, [data-testid="stWidgetLabel"], p {
     transition: all 0.2s !important;
 }
 [data-testid="stDownloadButton"] button:hover {
-    background: rgba(168,230,212,0.14) !important;
-    box-shadow: 0 4px 16px rgba(168,230,212,0.15) !important;
+    background: rgba(26,122,94,0.16) !important;
+    box-shadow: 0 4px 16px rgba(26,122,94,0.18) !important;
 }
 
 /* ── IMAGES ── */
@@ -298,7 +298,7 @@ def hitung_npcr_uaci(c1, c2):
 def fig_bytes(fig):
     buf = io.BytesIO()
     fig.savefig(buf, format='png', dpi=130, bbox_inches='tight',
-                facecolor='#141c26', edgecolor='none')
+                facecolor='#f0f6ff', edgecolor='none')
     buf.seek(0); return buf
 
 # ─────────────────────────────────────────
@@ -307,32 +307,32 @@ def fig_bytes(fig):
 st.markdown("""
 <div style="
     padding: 2rem 2.4rem 1.8rem;
-    background: linear-gradient(135deg, #1a2433 0%, #1e2d40 50%, #1a2e42 100%);
-    border: 1px solid rgba(168,216,240,0.2);
+    background: linear-gradient(135deg, #ddeaf8 0%, #e8f1fb 50%, #d8eaf8 100%);
+    border: 1px solid rgba(42,111,168,0.25);
     border-radius: 14px;
     margin-bottom: 1.6rem;
     position: relative; overflow: hidden;
 ">
     <div style="position:absolute;top:0;left:0;right:0;height:2px;
-                background:linear-gradient(90deg,transparent,#a8d8f0 40%,#c8b8f0 70%,transparent);"></div>
+                background:linear-gradient(90deg,transparent,#2a6fa8 40%,#5a3ea0 70%,transparent);"></div>
     <div style="position:absolute;bottom:0;right:0;width:300px;height:300px;
-                background:radial-gradient(circle,rgba(168,216,240,0.04) 0%,transparent 70%);
+                background:radial-gradient(circle,rgba(42,111,168,0.06) 0%,transparent 70%);
                 pointer-events:none;"></div>
     <div style="display:flex;align-items:center;gap:1.2rem;">
         <div style="
             width:52px;height:52px;border-radius:12px;
-            background:rgba(168,216,240,0.1);
-            border:1px solid rgba(168,216,240,0.25);
+            background:rgba(42,111,168,0.12);
+            border:1px solid rgba(42,111,168,0.30);
             display:flex;align-items:center;justify-content:center;
-            font-size:1.5rem;
+            font-size:1.5rem; color:#1d5a8e;
         ">◈</div>
         <div>
             <div style="font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:700;
-                        color:#f0ece4;letter-spacing:1px;line-height:1.1;">
+                        color:#1a2e42;letter-spacing:1px;line-height:1.1;">
                 Chaos TSL Cipher
             </div>
             <div style="font-family:'DM Mono',monospace;font-size:0.68rem;
-                        color:#a8d8f0;letter-spacing:2px;margin-top:4px;opacity:0.8;">
+                        color:#2a6fa8;letter-spacing:2px;margin-top:4px;opacity:0.85;">
                 Logistic → Sine → Tent  ·  Image Encryption System
             </div>
         </div>
@@ -347,15 +347,15 @@ with st.sidebar:
     st.markdown("""
     <div style="padding:1rem 0 0.4rem;">
         <div style="font-family:'Sora',sans-serif;font-size:0.95rem;font-weight:600;
-                    color:#c5e8f8;letter-spacing:1px;">◈ Key Parameters</div>
+                    color:#1d5a8e;letter-spacing:1px;">◈ Key Parameters</div>
         <div style="font-family:'DM Mono',monospace;font-size:0.62rem;
-                    color:#3a5568;margin-top:3px;">cipher configuration</div>
+                    color:#5a7a98;margin-top:3px;">cipher configuration</div>
     </div>
     """, unsafe_allow_html=True)
     st.markdown("---")
 
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.62rem;
-                color:#3a5568;letter-spacing:1.5px;margin-bottom:0.7rem;
+                color:#5a7a98;letter-spacing:1.5px;margin-bottom:0.7rem;
                 text-transform:uppercase;">Chaos Map</div>""", unsafe_allow_html=True)
 
     x0 = st.number_input("x₀  —  Initial Condition",
@@ -370,7 +370,7 @@ with st.sidebar:
         step=0.01, format="%.4f", help="μ = 2.0 = chaos penuh")
 
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.62rem;
-                color:#3a5568;letter-spacing:1.5px;margin:1rem 0 0.7rem;
+                color:#5a7a98;letter-spacing:1.5px;margin:1rem 0 0.7rem;
                 text-transform:uppercase;">Diffusion</div>""", unsafe_allow_html=True)
 
     C0 = st.number_input("C₀  —  Diffusion Seed",
@@ -382,18 +382,18 @@ with st.sidebar:
 
     # Key summary
     st.markdown(f"""
-    <div style="background:rgba(168,216,240,0.05);
-                border:1px solid rgba(168,216,240,0.15);
+    <div style="background:rgba(42,111,168,0.07);
+                border:1px solid rgba(42,111,168,0.20);
                 border-radius:10px;padding:1rem 1.1rem;
                 font-family:'DM Mono',monospace;">
-        <div style="font-size:0.6rem;color:#3a5568;letter-spacing:1.5px;
+        <div style="font-size:0.6rem;color:#5a7a98;letter-spacing:1.5px;
                     margin-bottom:0.7rem;text-transform:uppercase;">Active Key</div>
-        <div style="font-size:0.73rem;line-height:2.1;color:#a8d8f0;">
-            x₀ <span style="color:#f0ece4;">= {x0:.6f}</span><br>
-            r &nbsp;<span style="color:#f0ece4;">= {r:.4f}</span><br>
-            μ &nbsp;<span style="color:#f0ece4;">= {mu:.4f}</span><br>
-            C₀ <span style="color:#f0ece4;">= {C0}</span>
-            &nbsp;&nbsp;N₀ <span style="color:#f0ece4;">= {N0}</span>
+        <div style="font-size:0.73rem;line-height:2.1;color:#2a6fa8;">
+            x₀ <span style="color:#1a2e42;">= {x0:.6f}</span><br>
+            r &nbsp;<span style="color:#1a2e42;">= {r:.4f}</span><br>
+            μ &nbsp;<span style="color:#1a2e42;">= {mu:.4f}</span><br>
+            C₀ <span style="color:#1a2e42;">= {C0}</span>
+            &nbsp;&nbsp;N₀ <span style="color:#1a2e42;">= {N0}</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -401,9 +401,9 @@ with st.sidebar:
     st.markdown("<br>", unsafe_allow_html=True)
 
     chaos_ok = r >= 3.57 and mu >= 1.8 and 0.01 < x0 < 0.99
-    ok_color  = "#a8e6d4" if chaos_ok else "#f0a8b8"
-    ok_bg     = "rgba(168,230,212,0.07)" if chaos_ok else "rgba(240,168,184,0.07)"
-    ok_border = "rgba(168,230,212,0.25)" if chaos_ok else "rgba(240,168,184,0.25)"
+    ok_color  = "#1a7a5e" if chaos_ok else "#c0284a"
+    ok_bg     = "rgba(26,122,94,0.08)" if chaos_ok else "rgba(192,40,74,0.08)"
+    ok_border = "rgba(26,122,94,0.28)" if chaos_ok else "rgba(192,40,74,0.28)"
     ok_label  = "Chaos regime optimal" if chaos_ok else "Suboptimal — check r, μ"
     st.markdown(f"""
     <div style="display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.9rem;
@@ -422,13 +422,13 @@ col_up, col_btn = st.columns([3, 1])
 
 with col_up:
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                color:#3a5568;letter-spacing:1.5px;margin-bottom:0.5rem;
+                color:#5a7a98;letter-spacing:1.5px;margin-bottom:0.5rem;
                 text-transform:uppercase;">Input Image</div>""", unsafe_allow_html=True)
     uploaded = st.file_uploader("img", type=["jpg","jpeg","png"], label_visibility="collapsed")
 
 with col_btn:
     st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                color:#3a5568;letter-spacing:1.5px;margin-bottom:0.5rem;
+                color:#5a7a98;letter-spacing:1.5px;margin-bottom:0.5rem;
                 text-transform:uppercase;">Execute</div>""", unsafe_allow_html=True)
     run_enc = st.button("◈  Encrypt", use_container_width=True)
     run_dec = st.button("◇  Decrypt", use_container_width=True)
@@ -442,13 +442,13 @@ if uploaded:
     M, N, ch = plain.shape
 
     st.markdown(f"""
-    <div style="display:flex;gap:2rem;background:rgba(168,216,240,0.04);
-                border:1px solid rgba(168,216,240,0.1);border-radius:8px;
+    <div style="display:flex;gap:2rem;background:rgba(42,111,168,0.06);
+                border:1px solid rgba(42,111,168,0.15);border-radius:8px;
                 padding:0.6rem 1.2rem;font-family:'DM Mono',monospace;
-                font-size:0.72rem;color:#3a5568;margin-bottom:0.5rem;">
-        <span>shape <span style="color:#a8d8f0;">{M}×{N}×{ch}</span></span>
-        <span>pixels <span style="color:#a8d8f0;">{M*N:,}</span></span>
-        <span>bytes <span style="color:#a8d8f0;">{M*N*ch:,}</span></span>
+                font-size:0.72rem;color:#5a7a98;margin-bottom:0.5rem;">
+        <span>shape <span style="color:#1d5a8e;">{M}×{N}×{ch}</span></span>
+        <span>pixels <span style="color:#1d5a8e;">{M*N:,}</span></span>
+        <span>bytes <span style="color:#1d5a8e;">{M*N*ch:,}</span></span>
     </div>""", unsafe_allow_html=True)
 
     if run_enc:
@@ -462,22 +462,22 @@ if uploaded:
             t_dec = time.perf_counter() - t0
 
         st.markdown(f"""
-        <div style="background:rgba(168,230,212,0.07);border:1px solid rgba(168,230,212,0.25);
+        <div style="background:rgba(26,122,94,0.08);border:1px solid rgba(26,122,94,0.30);
                     border-radius:8px;padding:0.65rem 1.2rem;margin-bottom:0.5rem;
-                    font-family:'DM Mono',monospace;font-size:0.75rem;color:#a8e6d4;">
+                    font-family:'DM Mono',monospace;font-size:0.75rem;color:#1a7a5e;">
             ✓ &nbsp; Encryption: {t_enc:.3f}s &nbsp;·&nbsp; Decryption: {t_dec:.3f}s
         </div>""", unsafe_allow_html=True)
 
         # Images
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#3a5568;letter-spacing:1.5px;margin:1.2rem 0 0.6rem;
+                    color:#5a7a98;letter-spacing:1.5px;margin:1.2rem 0 0.6rem;
                     text-transform:uppercase;">Visual Output</div>""", unsafe_allow_html=True)
 
         c1, c2, c3 = st.columns(3)
         for col, img, lbl, clr in [
-            (c1, plain,     "Plaintext",  "#6a8fa8"),
-            (c2, cipher,    "Ciphertext", "#a8d8f0"),
-            (c3, decrypted, "Decrypted",  "#a8e6d4"),
+            (c1, plain,     "Plaintext",  "#3a6080"),
+            (c2, cipher,    "Ciphertext", "#2a6fa8"),
+            (c3, decrypted, "Decrypted",  "#1a7a5e"),
         ]:
             with col:
                 st.markdown(f"""<div style="font-family:'DM Mono',monospace;font-size:0.68rem;
@@ -500,24 +500,24 @@ if uploaded:
         npcr, uaci = hitung_npcr_uaci(cipher, cm)
 
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#3a5568;letter-spacing:1.5px;margin:1.5rem 0 0.8rem;
+                    color:#5a7a98;letter-spacing:1.5px;margin:1.5rem 0 0.8rem;
                     text-transform:uppercase;">Security Analysis</div>""", unsafe_allow_html=True)
 
         def mcard(col, label, val, sub, ok):
-            c  = "#a8e6d4" if ok else "#f0a8b8"
-            bg = "rgba(168,230,212,0.07)" if ok else "rgba(240,168,184,0.07)"
-            bd = "rgba(168,230,212,0.22)" if ok else "rgba(240,168,184,0.22)"
+            c  = "#1a7a5e" if ok else "#c0284a"
+            bg = "rgba(26,122,94,0.07)" if ok else "rgba(192,40,74,0.07)"
+            bd = "rgba(26,122,94,0.22)" if ok else "rgba(192,40,74,0.22)"
             col.markdown(f"""
-            <div style="background:var(--bg3,#1f2d3d);border:1px solid {bd};
+            <div style="background:var(--bg3,#ddeaf8);border:1px solid {bd};
                         border-top:2px solid {c};border-radius:10px;
                         padding:1rem 0.9rem 0.85rem;text-align:center;">
                 <div style="font-family:'DM Mono',monospace;font-size:0.6rem;
-                            color:#3a5568;letter-spacing:1px;text-transform:uppercase;
+                            color:#5a7a98;letter-spacing:1px;text-transform:uppercase;
                             margin-bottom:0.3rem;">{label}</div>
                 <div style="font-family:'Sora',sans-serif;font-size:1.55rem;font-weight:700;
                             color:{c};margin:0.1rem 0;">{val}</div>
                 <div style="font-family:'DM Mono',monospace;font-size:0.6rem;
-                            color:{c};opacity:0.6;">{sub}</div>
+                            color:{c};opacity:0.7;">{sub}</div>
             </div>""", unsafe_allow_html=True)
 
         m1,m2,m3,m4,m5 = st.columns(5)
@@ -529,7 +529,7 @@ if uploaded:
 
         # Correlation
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#3a5568;letter-spacing:1.5px;margin:1.5rem 0 0.7rem;
+                    color:#5a7a98;letter-spacing:1.5px;margin:1.5rem 0 0.7rem;
                     text-transform:uppercase;">Pixel Correlation</div>""", unsafe_allow_html=True)
 
         ct1, ct2 = st.columns(2)
@@ -537,63 +537,63 @@ if uploaded:
             rows = ""
             for nm, v in zip(["Horizontal","Vertikal","Diagonal"], corrs):
                 ok = abs(v) < 0.05
-                ic = "#a8e6d4" if ok else "#f0a8b8"
+                ic = "#1a7a5e" if ok else "#c0284a"
                 rows += f"""<tr>
-                    <td style="padding:0.4rem 0.9rem;color:#3a5568;font-size:0.7rem;">{nm}</td>
+                    <td style="padding:0.4rem 0.9rem;color:#5a7a98;font-size:0.7rem;">{nm}</td>
                     <td style="padding:0.4rem 0.9rem;font-family:'DM Mono',monospace;
                                color:{color};font-size:0.78rem;">{v:+.4f}</td>
                     <td style="padding:0.4rem 0.9rem;color:{ic};font-size:0.72rem;">
                         {'✓' if ok else '✗'}</td></tr>"""
             col.markdown(f"""
-            <div style="background:#1f2d3d;border:1px solid rgba(168,216,240,0.1);
+            <div style="background:#ddeaf8;border:1px solid rgba(42,111,168,0.15);
                         border-radius:10px;overflow:hidden;">
-                <div style="padding:0.65rem 1rem;border-bottom:1px solid rgba(168,216,240,0.08);
+                <div style="padding:0.65rem 1rem;border-bottom:1px solid rgba(42,111,168,0.10);
                             font-family:'DM Mono',monospace;font-size:0.65rem;
                             color:{color};letter-spacing:1px;">{title}</div>
                 <table style="width:100%;border-collapse:collapse;">{rows}</table>
             </div>""", unsafe_allow_html=True)
 
-        corr_tbl(ct1, "Plaintext",           corr_p, "#6a8fa8")
-        corr_tbl(ct2, "Ciphertext  (ideal ≈ 0)", corr_c, "#a8d8f0")
+        corr_tbl(ct1, "Plaintext",           corr_p, "#3a6080")
+        corr_tbl(ct2, "Ciphertext  (ideal ≈ 0)", corr_c, "#2a6fa8")
 
         # Histograms
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#3a5568;letter-spacing:1.5px;margin:1.5rem 0 0.6rem;
+                    color:#5a7a98;letter-spacing:1.5px;margin:1.5rem 0 0.6rem;
                     text-transform:uppercase;">Histograms</div>""", unsafe_allow_html=True)
 
-        plt.style.use('dark_background')
+        plt.style.use('default')
         fig_h, axes = plt.subplots(1, 2, figsize=(13, 3.8))
-        fig_h.patch.set_facecolor('#141c26')
-        clrs = ('#f0a8b8', '#a8d8f0', '#a8e6d4')
+        fig_h.patch.set_facecolor('#f0f6ff')
+        clrs = ('#c0284a', '#2a6fa8', '#1a7a5e')
         for ax in axes:
-            ax.set_facecolor('#1a2433')
-            for sp in ax.spines.values(): sp.set_color('#253547')
-            ax.tick_params(colors='#3a5568', labelsize=8)
-            ax.grid(axis='y', color='#1f2d3d', linewidth=0.6)
+            ax.set_facecolor('#e8f1fb')
+            for sp in ax.spines.values(): sp.set_color('#c2d7f0')
+            ax.tick_params(colors='#3a6080', labelsize=8)
+            ax.grid(axis='y', color='#ddeaf8', linewidth=0.6)
         for i,(c,l) in enumerate(zip(clrs,('R','G','B'))):
             h,_ = np.histogram(plain[:,:,i].ravel(), 256, [0,256])
             axes[0].plot(h, color=c, alpha=0.75, label=l, linewidth=1.1)
-        axes[0].set_title("Plaintext", color='#6a8fa8', fontsize=9, pad=8)
-        axes[0].legend(labelcolor='#d8eaf5', fontsize=8)
+        axes[0].set_title("Plaintext", color='#3a6080', fontsize=9, pad=8)
+        axes[0].legend(labelcolor='#1a2e42', fontsize=8)
         for i,(c,l) in enumerate(zip(clrs,('R','G','B'))):
             h,_ = np.histogram(cipher[:,:,i].ravel(), 256, [0,256])
             axes[1].plot(h, color=c, alpha=0.75, label=l, linewidth=1.1)
-        axes[1].set_title("Ciphertext  [ uniform = secure ]", color='#a8d8f0', fontsize=9, pad=8)
-        axes[1].legend(labelcolor='#d8eaf5', fontsize=8)
+        axes[1].set_title("Ciphertext  [ uniform = secure ]", color='#2a6fa8', fontsize=9, pad=8)
+        axes[1].legend(labelcolor='#1a2e42', fontsize=8)
         plt.tight_layout(pad=1.5)
         st.image(fig_bytes(fig_h), use_container_width=True)
         plt.close(fig_h)
 
         # Scatter
         st.markdown("""<div style="font-family:'DM Mono',monospace;font-size:0.65rem;
-                    color:#3a5568;letter-spacing:1.5px;margin:1rem 0 0.6rem;
+                    color:#5a7a98;letter-spacing:1.5px;margin:1rem 0 0.6rem;
                     text-transform:uppercase;">Correlation Scatter</div>""", unsafe_allow_html=True)
 
         rng = np.random.default_rng(42)
         xi  = rng.integers(0, M-1, 2000); yi = rng.integers(0, N-1, 2000)
         gp  = plain[:,:,0].astype(np.float64); gc = cipher[:,:,0].astype(np.float64)
         fig_s, axs = plt.subplots(3, 2, figsize=(10, 9))
-        fig_s.patch.set_facecolor('#141c26')
+        fig_s.patch.set_facecolor('#f0f6ff')
         dirs = [
             ("Horizontal", gp[xi,yi], gp[xi,yi+1], gc[xi,yi], gc[xi,yi+1]),
             ("Vertical",   gp[xi,yi], gp[xi+1,yi], gc[xi,yi], gc[xi+1,yi]),
@@ -601,13 +601,13 @@ if uploaded:
         ]
         for i,(nm,px,py,cx,cy) in enumerate(dirs):
             for ax in axs[i]:
-                ax.set_facecolor('#1a2433')
-                for sp in ax.spines.values(): sp.set_color('#253547')
-                ax.tick_params(colors='#3a5568', labelsize=7)
-            axs[i,0].scatter(px, py, s=1.2, alpha=0.3, color='#6a8fa8')
-            axs[i,0].set_title(f"Plain — {nm}  r={corr_p[i]:.4f}", color='#6a8fa8', fontsize=8)
-            axs[i,1].scatter(cx, cy, s=1.2, alpha=0.3, color='#a8d8f0')
-            axs[i,1].set_title(f"Cipher — {nm}  r={corr_c[i]:.4f}", color='#a8d8f0', fontsize=8)
+                ax.set_facecolor('#e8f1fb')
+                for sp in ax.spines.values(): sp.set_color('#c2d7f0')
+                ax.tick_params(colors='#3a6080', labelsize=7)
+            axs[i,0].scatter(px, py, s=1.2, alpha=0.3, color='#3a6080')
+            axs[i,0].set_title(f"Plain — {nm}  r={corr_p[i]:.4f}", color='#3a6080', fontsize=8)
+            axs[i,1].scatter(cx, cy, s=1.2, alpha=0.3, color='#2a6fa8')
+            axs[i,1].set_title(f"Cipher — {nm}  r={corr_c[i]:.4f}", color='#2a6fa8', fontsize=8)
         plt.tight_layout(pad=1.5)
         st.image(fig_bytes(fig_s), use_container_width=True)
         plt.close(fig_s)
@@ -623,9 +623,9 @@ if uploaded:
             result = decrypt(plain, x0, r, mu, C0, N0)
             t_dec = time.perf_counter() - t0
         st.markdown(f"""
-        <div style="background:rgba(168,230,212,0.07);border:1px solid rgba(168,230,212,0.25);
+        <div style="background:rgba(26,122,94,0.08);border:1px solid rgba(26,122,94,0.30);
                     border-radius:8px;padding:0.65rem 1.2rem;margin-bottom:0.5rem;
-                    font-family:'DM Mono',monospace;font-size:0.75rem;color:#a8e6d4;">
+                    font-family:'DM Mono',monospace;font-size:0.75rem;color:#1a7a5e;">
             ✓ &nbsp; Decryption complete: {t_dec:.3f}s
         </div>""", unsafe_allow_html=True)
         d1, d2 = st.columns(2)
@@ -638,39 +638,39 @@ if uploaded:
 
 else:
     st.markdown("""
-    <div style="margin-top:0.8rem;padding:2.4rem;background:#1a2433;
-                border:1px solid rgba(168,216,240,0.1);border-radius:14px;text-align:center;">
-        <div style="font-size:2rem;opacity:0.2;margin-bottom:0.8rem;">◈</div>
+    <div style="margin-top:0.8rem;padding:2.4rem;background:#e8f1fb;
+                border:1px solid rgba(42,111,168,0.15);border-radius:14px;text-align:center;">
+        <div style="font-size:2rem;opacity:0.35;margin-bottom:0.8rem;color:#2a6fa8;">◈</div>
         <div style="font-family:'Sora',sans-serif;font-size:1rem;font-weight:600;
-                    color:#3a5568;letter-spacing:1px;">Upload an image to begin</div>
+                    color:#3a6080;letter-spacing:1px;">Upload an image to begin</div>
         <div style="font-family:'DM Mono',monospace;font-size:0.67rem;
-                    color:#2c3e52;margin-top:0.4rem;">
+                    color:#7090aa;margin-top:0.4rem;">
             JPG & PNG supported  ·  configure key parameters in sidebar</div>
     </div>
 
     <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem;">
-        <div style="padding:1.2rem;background:#1a2433;
-                    border:1px solid rgba(168,216,240,0.08);border-radius:11px;">
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#2c3e52;
+        <div style="padding:1.2rem;background:#e8f1fb;
+                    border:1px solid rgba(42,111,168,0.12);border-radius:11px;">
+            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#7090aa;
                         letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">
                 Logistic Map</div>
-            <div style="font-size:0.83rem;color:#4a7a98;line-height:1.5;">
+            <div style="font-size:0.83rem;color:#2a6fa8;line-height:1.5;">
                 r·x·(1−x) — generates chaotic pseudo-random sequence</div>
         </div>
-        <div style="padding:1.2rem;background:#1a2433;
-                    border:1px solid rgba(168,216,240,0.08);border-radius:11px;">
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#2c3e52;
+        <div style="padding:1.2rem;background:#e8f1fb;
+                    border:1px solid rgba(42,111,168,0.12);border-radius:11px;">
+            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#7090aa;
                         letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">
                 Sine Map</div>
-            <div style="font-size:0.83rem;color:#4a7a98;line-height:1.5;">
+            <div style="font-size:0.83rem;color:#2a6fa8;line-height:1.5;">
                 sin(π·x) — amplifies nonlinearity & unpredictability</div>
         </div>
-        <div style="padding:1.2rem;background:#1a2433;
-                    border:1px solid rgba(168,216,240,0.08);border-radius:11px;">
-            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#2c3e52;
+        <div style="padding:1.2rem;background:#e8f1fb;
+                    border:1px solid rgba(42,111,168,0.12);border-radius:11px;">
+            <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:#7090aa;
                         letter-spacing:1.5px;margin-bottom:0.5rem;text-transform:uppercase;">
                 Tent Map</div>
-            <div style="font-size:0.83rem;color:#4a7a98;line-height:1.5;">
+            <div style="font-size:0.83rem;color:#2a6fa8;line-height:1.5;">
                 μ·min(x, 1−x) — uniform distribution enhancement</div>
         </div>
     </div>
